@@ -105,6 +105,21 @@ $(document).ready(function() {
     event.preventDefault();
   });
 
+  $("#compose").on("click", function() {
+    $(".new-tweet").slideToggle();
+    $(".new-tweet textarea").focus();
+  })
+
+  $(".new-tweet").on("focus", "textarea", function() {
+    $(this).css("border-color", "#719ECE");
+    $(this).css("box-shadow", "0 0 10px #719ECE");
+  })
+
+  $(".new-tweet").on("blur", "textarea", function() {
+    $(this).css("border-color", "#eee");
+    $(this).css("box-shadow", "none");
+  })
+
 
   loadTweets();
 });
