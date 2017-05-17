@@ -66,7 +66,6 @@ $(document).ready(function() {
   }
 
   function loadTweets() {
-    console.log("here");
     $.ajax({
       url: "/tweets",
       method: "GET",
@@ -79,6 +78,19 @@ $(document).ready(function() {
   }
 
   $("#submit").on("click", function(event) {
+    let counter = +$(this).siblings(".counter").text();
+    let limit = +$(this).closest(".new-tweet").data("limit");
+    if (counter < 0 ) {
+      $(this).siblings(".flashMsg").text("Content too long.");
+      event.preventDefault();
+      return;
+    }
+    if (counter === limit) {
+      $(this).siblings(".flashMsg").text("No content.");
+      event.preventDefault();
+      return;
+    }
+
     $.ajax({
       url: $(this).closest("form").attr('action'),
       method: $(this).closest("form").attr('method'),

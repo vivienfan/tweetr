@@ -22,3 +22,9 @@
   float: right;
   margin: 8px;
 }
+
+.flashMsg{
+  margin-left: 10px;
+  color: red;
+  font-size: 12px;
+}
