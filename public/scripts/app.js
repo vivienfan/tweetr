@@ -65,14 +65,27 @@ $(document).ready(function() {
     });
   }
 
-  $("#submit").on("click", function(event) {
+  function loadTweets() {
+    console.log("here");
     $.ajax({
       url: "/tweets",
-      method: "POST",
-      data: $(this).siblings('textarea').serialize(),
-      success: function() {
+      method: "GET",
+      data: {get_param: 'value'},
+      dataType: 'json',
+      success: function (tweets) {
+        renderTweets(tweets);
       }
+    });
+  }
+
+  $("#submit").on("click", function(event) {
+    $.ajax({
+      url: $(this).closest("form").attr('action'),
+      method: $(this).closest("form").attr('method'),
+      data: $(this).siblings('textarea').serialize(),
     });
     event.preventDefault();
   });
+
+  loadTweets();
 });

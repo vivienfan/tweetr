@@ -11,7 +11,7 @@
 
 #tweets-container header{
   padding: 10px;
-  height: 5em;
+  height: 4em;
   background-color: #eee;
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
@@ -20,15 +20,17 @@
 }
 
 #tweets-container .avatar{
-  float: left;
-  width: 60px;
   display: table-cell;
+  vertical-align: middle;
 }
 
 #tweets-container .name{
   display: table-cell;
   vertical-align: middle;
   text-align: left;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #tweets-container .handle{
@@ -40,6 +42,8 @@
 
 #tweets-container .tweet{
   padding: 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;;
 }
 
 #tweets-container footer{
