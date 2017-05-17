@@ -61,7 +61,7 @@ $(document).ready(function() {
 
   function renderTweets(tweets) {
     tweets.forEach((tweet) => {
-      $('#tweets-container').append(createTweetElement(tweet));
+      $('#tweets-container').prepend(createTweetElement(tweet));
     });
   }
 
@@ -95,9 +95,16 @@ $(document).ready(function() {
       url: $(this).closest("form").attr('action'),
       method: $(this).closest("form").attr('method'),
       data: $(this).siblings('textarea').serialize(),
+      complete: function(res) {
+        if (res.status === 201) {
+          console.log("loadTweets!!!");
+          loadTweets();
+        }
+      }
     });
     event.preventDefault();
   });
+
 
   loadTweets();
 });
