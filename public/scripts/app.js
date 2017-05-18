@@ -4,6 +4,7 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 $(document).ready(function() {
+  const userId = "abc123";
 
   // This helper function checks the created time of the tweet,
   // and to return the appropriate message in the form "{#} {unit} ago"
@@ -61,9 +62,7 @@ $(document).ready(function() {
     let $avatar = $("<img>", { class: "avatar", src: tweet.user.avatars.small });
     let $name = $("<h2>", { class: "name" }).text(tweet.user.name);
     let $handle = $("<p>", { class: "handle" }).text(tweet.user.handle);
-    $header.append($avatar);
-    $header.append($name);
-    $header.append($handle);
+    $header.append($avatar, $name, $handle);
 
     // body section
     let $tweet = $("<p>", { class: "tweet" }).text(tweet.content.text);
@@ -71,20 +70,20 @@ $(document).ready(function() {
     // footer section
     let $footer = $("<footer>");
     let $time = $("<p>").text(getDate(tweet.created_at));
-    let $hover0 = $("<img>", { src: "https://www.teachforamerica.org/sites/default/files/styles/list_thumbnail/public/thumbnails/image/2016/07/assignment_icon.png?itok=GpRV4LEE" });
-    let $hover1 = $("<img>", { src: "https://www.teachforamerica.org/sites/default/files/styles/list_thumbnail/public/thumbnails/image/2016/07/assignment_icon.png?itok=GpRV4LEE" });
-    let $hover2 = $("<img>", { src: "https://www.teachforamerica.org/sites/default/files/styles/list_thumbnail/public/thumbnails/image/2016/07/assignment_icon.png?itok=GpRV4LEE" });
-    $footer.append($time);
-    $footer.append($hover0);
-    $footer.append($hover1);
-    $footer.append($hover2);
+    let $like = $("<form>", { action: `/tweets/${tweet._id}/${userId}`, method: "POST" });
+    let $hover0 = $("<input>", { class: "like-tweet", type: "image", src: "/images/heart-outline.png" });
+//    let $hover2 = $("<img>", { src: "https://www.teachforamerica.org/sites/default/files/styles/list_thumbnail/public/thumbnails/image/2016/07/assignment_icon.png?itok=GpRV4LEE" });
+//    let $hover1 = $("<img>", { src: "https://www.teachforamerica.org/sites/default/files/styles/list_thumbnail/public/thumbnails/image/2016/07/assignment_icon.png?itok=GpRV4LEE" });
+//    let $hover2 = $("<img>", { src: "https://www.teachforamerica.org/sites/default/files/styles/list_thumbnail/public/thumbnails/image/2016/07/assignment_icon.png?itok=GpRV4LEE" });
+    $like.append($hover0);
+    $footer.append($time, $like);
+//    $footer.append($hover1);
+//    $footer.append($hover2);
 
     // entire article
     let $article = $("<article>");
-    $article.append($header);
-    $article.append($tweet);
-    $article.append($footer);
-
+    $article.attr("data-tid", tweet._id);
+    $article.append($header, $tweet, $footer);
     return $article;
   }
 
@@ -136,21 +135,20 @@ $(document).ready(function() {
   // target: #submit (button)
   // event: on click
   $("#submit").on("click", function(event) {
+    // overriding the html form tag behaviour
+    event.preventDefault();
+
     // check if the tweet content is empty, or exceeded the limit
     // if error, display flash message and return
     let counter = +$(this).siblings(".counter").text();
     let limit = +$(this).closest(".new-tweet").data("limit");
     if (counter < 0 ) {
       $(this).siblings(".flashMsg").text("Content too long.");
-    // overriding the html form tag behaviour
-    event.preventDefault();
-          return;
+        return;
     }
     if (counter === limit) {
       $(this).siblings(".flashMsg").text("No content.");
-    // overriding the html form tag behaviour
-    event.preventDefault();
-          return;
+        return;
     }
 
     // send a ajax request, replacing the request from original html form
@@ -164,8 +162,6 @@ $(document).ready(function() {
           loadTweets(1);
       }
     });
-        // overriding the html form tag behaviour
-    event.preventDefault();
   });
 
   // Event listener: slide toggle the new-tweet section, and give focus on the textarea
@@ -180,18 +176,39 @@ $(document).ready(function() {
   // targer: .new-tweet textarea
   // event: on focus
   $(".new-tweet").on("focus", "textarea", function() {
-    $(this).css("border-color", "#719ECE");
-    $(this).css("box-shadow", "0 0 10px #719ECE");
+    $(this).addClass("highlight");
   })
 
   // Event listener: undo textare focus effect
   // targer: .new-tweet textare
   // event: on blur
   $(".new-tweet").on("blur", "textarea", function() {
-    $(this).css("border-color", "#eee");
-    $(this).css("box-shadow", "none");
+    $(this).removeClass("highlight");
   })
+
+  $("#tweets-container").on("click", ".like-tweet", function(event) {
+    // send a ajax request, replacing the request from original html form
+    // highlight or undo highlight on sucess
+    $.ajax({
+      url: $(this).closest("form").attr('action'),
+      method: $(this).closest("form").attr('method'),
+      data: {id: $(this).closest("article").data("tid"), option: $(this).data("liked")},
+      dataType: "json",
+      success: function(like) {
+        console.log(like);
+        if (like) {
+          $(event.target).attr("src", "/images/heart.png");
+        } else {
+          $(event.target).attr("src", "/images/heart-outline.png");
+        }
+      }
+    });
+    // overriding the html form tag behaviour
+    event.preventDefault();
+  });
+
 
   // page initialization
   loadTweets();
+  $(".new-tweet").slideUp();
 });

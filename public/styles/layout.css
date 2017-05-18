@@ -30,3 +30,8 @@ main {
   background-color: white;
   padding-top: 140px;
 }
+
+.highlight {
+  border-color: 1px solid #719ECE;
+  box-shadow: 0 0 10px #719ECE);
+}
