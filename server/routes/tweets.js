@@ -8,26 +8,33 @@ const tweetsRoutes  = express.Router();
 module.exports = function(DataHelpers) {
 
   tweetsRoutes.get("/", function(req, res) {
-    DataHelpers.getTweets((err, tweets) => {
+    let userId = req.body.getUserInfo ? false : req.session.user_id;
+    DataHelpers.getTweets(userId, (err, userInfo, tweets) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
-        res.json(tweets);
+        res.json({
+          userInfo: userInfo,
+          tweets: tweets
+        });
       }
     });
   });
 
   tweetsRoutes.post("/", function(req, res) {
-    if (!req.body.text) {
+    if (!req.body) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
       return;
     }
 
-    const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
     const tweet = {
-      user: user,
+      user: {
+        name: req.body.name,
+        handle: req.body.handle,
+        avatars: { small: req.body.avatar },
+      },
       content: {
-        text: req.body.text
+        text: req.body.content
       },
       created_at: Date.now(),
       likes: []

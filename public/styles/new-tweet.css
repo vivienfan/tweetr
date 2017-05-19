@@ -1,9 +1,9 @@
 .new-tweet {
-  margin-left: 2em;
-  margin-right:2em;
+  margin: 2em;
   border-radius: 9px;
   background-color: #eee;
   padding: 10px;
+  display: none;
 }
 
 .new-tweet h2 {
@@ -21,10 +21,4 @@
 .counter{
   float: right;
   margin: 8px;
-}
-
-.flashMsg{
-  margin-left: 10px;
-  color: red;
-  font-size: 12px;
 }

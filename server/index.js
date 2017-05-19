@@ -1,14 +1,19 @@
 "use strict";
 
-// Basic express setup:
+const PORT            = 8080;
+const express         = require("express");
+const bodyParser      = require("body-parser");
+const cookieSession   = require('cookie-session');
+const bcrypt          = require('bcrypt');
 
-const PORT          = 8080;
-const express       = require("express");
-const bodyParser    = require("body-parser");
-const app           = express();
-
+const app             = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(cookieSession({
+  name: "session",
+  keys: ["This-is-my-secrete-key"],
+  maxAge: 20 * 365 * 24 * 60 * 60 * 1000 // 20 years
+}));
 
 const MongoClient = require("mongodb").MongoClient;
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";
@@ -33,10 +38,13 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   // so it can define routes that use it to interact with the data layer.
   const tweetsRoutes = require("./routes/tweets")(DataHelpers);
 
+  const homeRoutes = require("./routes/home")(DataHelpers);
+
   // Mount the tweets routes at the "/tweets" path prefix:
   app.use("/tweets", tweetsRoutes);
+  app.use("/", homeRoutes);
+});
 
-  app.listen(PORT, () => {
-    console.log("Tweetr listening on port " + PORT);
-  });
+app.listen(PORT, () => {
+  console.log("Tweetr listening on port " + PORT);
 });

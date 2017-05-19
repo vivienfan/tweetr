@@ -1,10 +1,87 @@
 "use strict";
 
 const ObjectId = require("mongodb").ObjectID;
+const bcrypt = require('bcrypt');
 
 // Defines helper functions for saving and getting tweets, using the database `db`
 module.exports = function makeDataHelpers(db) {
   return {
+    // Saves a new user to db
+    register: function(userInfo, avatars, callback) {
+      // check if the username is already used
+      db.collection("users").find({ handle: `@${userInfo.username}` }).toArray((err, array) => {
+        if (err) {
+          callback(err, null, null, null);
+          return;
+        }
+        if (array.length !==0) {
+          callback(null, true, false, null);
+          return;
+        }
+
+        // check if the email is already registered
+        db.collection("users").find({ email: userInfo.email }).toArray((err, array) => {
+          if (err) {
+            callback(err, null, null, null);
+            return;
+          }
+          if (array.length !== 0) {
+            callback(null, false, true, null);
+            return;
+          }
+
+          // insert the new user
+          db.collection("users").insertOne(
+            {
+              first_name: userInfo.fname,
+              last_name: userInfo.lname,
+              handle: `@${userInfo.username}`,
+              email: userInfo.email,
+              avatars: avatars,
+              password:  bcrypt.hashSync(userInfo.password, 10)
+            }, (err, result) => {
+              if (err) {
+                callback(err, null, null, null);
+                return;
+              }
+              callback(null, true, true, {
+                id: result.insertedId,
+                name: `${result.ops[0].first_name} ${result.ops[0].last_name}`,
+                handle: result.ops[0].handle,
+                avatar: result.ops[0].avatars.small
+              });
+            }
+          );
+        });
+      });
+    },
+
+    login: function(key, password, callback){
+      db.collection("users").find({ $or: [ { handle: `@${key}` }, { email: key } ] }).toArray((err, array) => {
+        if (err) {
+          callback(err, null);
+          return;
+        }
+        if(!array[0]){
+          callback(null, null);
+          return;
+        }
+        if (bcrypt.compareSync(password, array[0].password)) {
+          callback(null, {
+            id: array[0]._id,
+            name: `${array[0].first_name} ${array[0].last_name}`,
+            handle: array[0].handle,
+            avatar: array[0].avatars.small
+          });
+        } else {
+          callback(null, null);
+        }
+      });
+    },
+
+    getUserInfo: function(userId, callback) {
+
+    },
 
     // Saves a tweet to db
     saveTweet: function(newTweet, callback) {
@@ -13,14 +90,32 @@ module.exports = function makeDataHelpers(db) {
     },
 
     // Get all tweets in db, sorted by newest first
-    getTweets: function(callback) {
-      db.collection("tweets").find().toArray((err, array) => {
+    getTweets: function(userId, callback) {
+      const sortNewestFirst = (a, b) => a.created_at - b.created_at;
+      db.collection("tweets").find().toArray((err, arr_tweets) => {
         if (err) {
-          callback(err, null);
+          callback(err, null, null);
           return;
         }
-        const sortNewestFirst = (a, b) => a.created_at - b.created_at;
-        callback(null, array.sort(sortNewestFirst));
+        if (userId) {
+          db.collection("users").find({ _id: ObjectId(userId) }).toArray((err, arr_user) => {
+            if (err) {
+              callback(err, null, null);
+              return;
+            }
+            if (arr_user[0]) {
+              callback(null, {
+                handle: arr_user[0].handle,
+                name: `${arr_user[0].first_name} ${arr_user[0].last_name}`,
+                avatar: arr_user[0].avatars.small
+              }, arr_tweets.sort(sortNewestFirst));
+            } else {
+              callback(null, null, arr_tweets.sort(sortNewestFirst));
+            }
+          });
+        } else {
+          callback(null, null, arr_tweets.sort(sortNewestFirst));
+        }
       });
     },
 

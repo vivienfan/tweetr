@@ -6,9 +6,6 @@
 
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css"/>
-    <link rel="stylesheet" href="../styles/nav.css" type="text/css"/>
-    <link rel="stylesheet" href="../styles/new-tweet.css" type="text/css"/>
-    <link rel="stylesheet" href="../styles/all-tweet.css" type="text/css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700">
@@ -16,6 +13,10 @@
 
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/nav.css" type="text/css"/>
+    <link rel="stylesheet" href="../styles/new-tweet.css" type="text/css"/>
+    <link rel="stylesheet" href="../styles/all-tweet.css" type="text/css"/>
+    <link rel="stylesheet" href="../styles/modal.css" type="text/css"/>
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
@@ -29,9 +30,24 @@
 
     <!-- Top nav bar (fixed) -->
     <nav id="nav-bar">
-      <img class="logo" src="/images/bird.png">
-      <span class="header">Tweeter</span>
-      <button id="compose">Compose</button>
+      <div id="logo_header">
+        <img class="logo" src="/images/bird.png">
+        <span class="header">Tweeter</span>
+      </div>
+      <div id="menu">
+          <span id="show-register" class="button">Register</span>
+          <span id="show-login" class="button">Login</span>
+          <div id="img-dropdown" class="hide">
+            <img id="m_avatar">
+            <div id="logged-menu">
+              <ul>
+                <li id="logout" class="button">Logout</li>
+                <li id="settings" class="button">Settings</li>
+              </ul>
+            </div>
+          </div>
+          <button id="compose" class="hide">Compose</button>
+      </div>
     </nav>
 
     <!-- Page-specific (main) content here -->
@@ -41,11 +57,79 @@
         <form action="/tweets" method="POST">
           <textarea name="text" placeholder="What are you humming about?"></textarea>
           <input id="submit" type="submit" value="Tweet">
-          <span class="flashMsg"></span>
+          <span class="flashMsg error"></span>
           <span class="counter">140</span>
         </form>
       </section>
       <section id="tweets-container"></section>
     </main>
   </body>
+
+  <!-- Login modal box -->
+  <div id="login-modal" class="modal hide">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h1>Login</h1>
+      <label>Email/Username:</label>
+      <br>
+      <input id="l_eu" type="text">
+      <span id="l_eu_miss" class="star hide error">&#42;</span>
+      <br><br>
+      <label>Password:</label>
+      <br>
+      <input id="l_password" type="password">
+      <span id="l_p_miss" class="star hide error">&#42;</span>
+      <br>
+      <div id="l_err" class="hide">
+        <span class="flashMsg error"><i>Email/Username</i> and <i>Password</i> does not match.</span>
+      </div>
+      <br><br>
+      <input id="login" type="submit" value="Login">
+    </div>
+  </div>
+
+  <!-- Register modal box -->
+  <div id="register-modal" class="modal hide">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h1>Register</h1>
+      <label>First Name:</label>
+      <br>
+      <input id="r_fname" type="text">
+      <span id="r_fn_miss" class="star hide error">&#42;</span>
+      <br><br>
+      <label>Last Name:</label>
+      <br>
+      <input id="r_lname" type="text">
+      <span id="r_ln_miss" class="star hide error">&#42;</span>
+      <br><br>
+      <label>Username:</label>
+      <br>
+      <input id="r_username" type="text">
+      <span id="r_un_miss" class="star hide error">&#42;</span>
+      <br>
+      <div id="r_uname_err" class="hide">
+        <span class="flashMsg error">This username has already been registered.</span>
+        <br>
+      </div>
+      <br>
+      <label>Email:</label>
+      <br>
+      <input id="r_email" type="email">
+      <span id="r_e_miss" class="star hide error">&#42;</span>
+      <br>
+      <div id="r_email_err" class="hide">
+        <span class="flashMsg error">This email has already been registered.</span>
+        <br>
+      </div>
+      <br>
+      <label>Password:</label>
+      <br>
+      <input id="r_password" type="password">
+      <span id="r_p_miss"  class="star hide error">&#42;</span>
+      <br><br><br>
+      <input id="register" type="submit" value="Register">
+    </div>
+  </div>
+
 </html>
