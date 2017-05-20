@@ -50,7 +50,8 @@
 #logged-menu{
   position: absolute;
   top: 70px;
-  border-radius: $radius;
+  border-bottom-left-radius: $radius;
+  border-bottom-right-radius: $radius;
   background-color: $tweeterBlue;
   padding: $mediumSpace;
 
@@ -81,5 +82,46 @@
   img {
     width: 20px;
     margin-right: $smallSpace;
+  }
+}
+
+@media (max-width: $mSize) {
+  #nav-bar {
+    height: 50px;
+    padding: 0 0.5em 0 0.5em;
+  }
+
+  #logo_header {
+    .logo {
+      height: 50px;
+    }
+
+    .header {
+      display: none;
+    }
+  }
+
+  #menu {
+    height: 40px;
+  }
+
+  #m_avatar {
+    height: 40px;
+  }
+
+  #logged-menu {
+    top: 45px;
+    padding: $smallSpace;
+    margin-left: 3px;
+
+    li {
+      font-size: $fontSmall;
+    }
+  }
+
+  #compose {
+    span {
+      display: none;
+    }
   }
 }

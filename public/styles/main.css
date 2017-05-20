@@ -96,7 +96,8 @@ body {
 #logged-menu {
   position: absolute;
   top: 70px;
-  border-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   background-color: #00a087;
   padding: 10px; }
   #logged-menu ul {
@@ -121,11 +122,32 @@ body {
     width: 20px;
     margin-right: 5px; }
 
+@media (max-width: 500px) {
+  #nav-bar {
+    height: 50px;
+    padding: 0 0.5em 0 0.5em; }
+  #logo_header .logo {
+    height: 50px; }
+  #logo_header .header {
+    display: none; }
+  #menu {
+    height: 40px; }
+  #m_avatar {
+    height: 40px; }
+  #logged-menu {
+    top: 45px;
+    padding: 5px;
+    margin-left: 3px; }
+    #logged-menu li {
+      font-size: 12px; }
+  #compose span {
+    display: none; } }
+
 main {
   width: 450px;
   margin: 0 auto;
   background-color: white;
-  padding-top: 100px;
+  padding-top: 80px;
   padding-bottom: 20px; }
 
 .new-tweet {
@@ -133,7 +155,7 @@ main {
   border-radius: 10px;
   background-color: #eee;
   padding: 10px;
-  border: 1px solid #eee; }
+  border: 1px solid #ddd; }
   .new-tweet h2 {
     border-bottom: 2px solid;
     margin-top: 5px;
@@ -150,6 +172,10 @@ main {
       height: 35px; }
     .new-tweet form div .counter {
       margin: 10px; }
+
+@media (max-width: 500px) {
+  .new-tweet {
+    margin: 1em; } }
 
 #tweets-container {
   margin-left: 2em;
@@ -204,3 +230,14 @@ main {
           outline: none; }
         #tweets-container article footer .footer-div .like-text {
           margin-left: 5px; }
+
+@media (max-width: 500px) {
+  #tweets-container {
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 0.5em; } }
+
+@media (max-width: 500px) {
+  main {
+    width: 400px;
+    padding-top: 50px; } }
