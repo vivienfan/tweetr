@@ -136,9 +136,9 @@ body {
     top: 55px;
     padding: 5px; }
   #compose img {
+    width: 20px;
     margin-left: -3px;
-    margin-right: -3px;
-    margin-top: -3px; }
+    margin-right: -3px; }
   #compose span {
     display: none; } }
 
@@ -162,6 +162,7 @@ body {
     #logged-menu li {
       font-size: 12px; }
   #compose img {
+    width: 20px;
     margin-left: -3px;
     margin-right: -3px;
     margin-top: -4px; }

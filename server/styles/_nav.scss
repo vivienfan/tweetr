@@ -68,7 +68,6 @@
 
 #compose {
   margin-left: $smallSpace;
-  // width: 130px;
   padding: $mediumSpace;
   height: 80%;
   border: $borderWidth solid black;
@@ -95,10 +94,6 @@
     .logo {
       height: 60px;
     }
-
-    .header {
-      // font-size: 100%;
-    }
   }
 
   #menu {
@@ -116,9 +111,9 @@
 
   #compose {
     img {
+      width: 20px;
       margin-left: -3px;
       margin-right: -3px;
-      margin-top: -3px;
     }
 
     span {
@@ -165,6 +160,7 @@
 
   #compose {
     img {
+      width: 20px;
       margin-left: -3px;
       margin-right: -3px;
       margin-top: -4px;

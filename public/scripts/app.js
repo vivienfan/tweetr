@@ -230,27 +230,31 @@ $(document).ready(function() {
   }
 
   function displayLogin(){
-    $("#img-dropdown").removeClass("hide");
-    $("#compose").removeClass("hide");
+    // disappear
     $("#logged-menu").slideUp();
     $("#show-register").addClass("hide");
     $("#show-login").addClass("hide");
-    $("#tweets-container").find(".like-tweet").removeClass("hide");
-    $("#m_avatar").attr("src", AVATAR);
-    $("#user-handle").removeClass("hide");
+    // show
     $("#user-handle").text(HANDLE);
+    $("#user-handle").removeClass("hide");
+    $("#m_avatar").attr("src", AVATAR);
+    $("#img-dropdown").removeClass("hide");
+    $("#compose").css("display", "block");
+    $("#tweets-container").find(".like-tweet").removeClass("hide");
   }
 
   function displayLogout() {
+    // disappear
+    $("#user-handle").text(HANDLE);
+    $("#user-handle").addClass("hide");
+    $("#img-dropdown").addClass("hide");
+    $("#compose").css("display", "none");
+    $(".new-tweet").slideUp();
+    $("#tweets-container").find(".like-tweet").addClass("hide");
+    // show
     $("#show-register").removeClass("hide");
     $("#show-login").removeClass("hide");
-    $("#img-dropdown").addClass("hide");
-    $("#compose").addClass("hide");
-    $("#tweets-container").find(".like-tweet").addClass("hide");
     $("#tweets-container").find(".like-text").removeClass("hide");
-    $(".new-tweet").slideUp();
-    $("#user-handle").addClass("hide");
-    $("#user-handle").text(HANDLE);
   }
 
 
