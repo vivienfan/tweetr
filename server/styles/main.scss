@@ -20,7 +20,8 @@ $largeSpace: 20px;
 $smallScreenPadding: 50px;
 $extraLargeSpace: 80px;
 
-$mSize: 500px;
+$mSize: 600px;
+$sSize: 500px;
 
 .clickable {
   cursor: pointer;
@@ -73,9 +74,9 @@ main {
 
 @import 'tweets-container';
 
-@media (max-width: $mSize) {
+@media (max-width: $sSize) {
   main {
-    width: 400px;
+    width: 380px;
     padding-top: $smallScreenPadding;
   }
 }

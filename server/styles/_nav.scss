@@ -87,6 +87,49 @@
 
 @media (max-width: $mSize) {
   #nav-bar {
+    height: 60px;
+    padding: 0 1em 0 1em;
+  }
+
+  #logo_header {
+    .logo {
+      height: 60px;
+    }
+
+    .header {
+      // font-size: 100%;
+    }
+  }
+
+  #menu {
+    height: 50px;
+  }
+
+  #m_avatar {
+    height: 45px;
+  }
+
+  #logged-menu {
+    top: 55px;
+    padding: $smallSpace;
+  }
+
+  #compose {
+    img {
+      margin-left: -3px;
+      margin-right: -3px;
+      margin-top: -3px;
+    }
+
+    span {
+      display: none;
+    }
+  }
+}
+
+
+@media (max-width: $sSize) {
+  #nav-bar {
     height: 50px;
     padding: 0 0.5em 0 0.5em;
   }
@@ -97,12 +140,13 @@
     }
 
     .header {
-      display: none;
+      font-size: 100%;
     }
   }
 
   #menu {
     height: 40px;
+    font-size: $fontSmall;
   }
 
   #m_avatar {
@@ -120,6 +164,12 @@
   }
 
   #compose {
+    img {
+      margin-left: -3px;
+      margin-right: -3px;
+      margin-top: -4px;
+    }
+
     span {
       display: none;
     }

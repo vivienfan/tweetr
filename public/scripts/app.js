@@ -237,6 +237,8 @@ $(document).ready(function() {
     $("#show-login").addClass("hide");
     $("#tweets-container").find(".like-tweet").removeClass("hide");
     $("#m_avatar").attr("src", AVATAR);
+    $("#user-handle").removeClass("hide");
+    $("#user-handle").text(HANDLE);
   }
 
   function displayLogout() {
@@ -247,6 +249,8 @@ $(document).ready(function() {
     $("#tweets-container").find(".like-tweet").addClass("hide");
     $("#tweets-container").find(".like-text").removeClass("hide");
     $(".new-tweet").slideUp();
+    $("#user-handle").addClass("hide");
+    $("#user-handle").text(HANDLE);
   }
 
 
