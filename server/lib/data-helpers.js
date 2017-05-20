@@ -38,6 +38,7 @@ module.exports = function makeDataHelpers(db) {
               handle: `@${userInfo.username}`,
               email: userInfo.email,
               avatars: avatars,
+              // entrypt the password
               password:  bcrypt.hashSync(userInfo.password, 10)
             }, (err, result) => {
               if (err) {
@@ -56,6 +57,7 @@ module.exports = function makeDataHelpers(db) {
       });
     },
 
+    // looks for either a handle/password or email/password match
     login: function(key, password, callback){
       db.collection("users").find({ $or: [ { handle: `@${key}` }, { email: key } ] }).toArray((err, array) => {
         if (err) {
@@ -66,6 +68,7 @@ module.exports = function makeDataHelpers(db) {
           callback(null, null);
           return;
         }
+        // compare hashed password
         if (bcrypt.compareSync(password, array[0].password)) {
           callback(null, {
             id: array[0]._id,
@@ -93,12 +96,16 @@ module.exports = function makeDataHelpers(db) {
           callback(err, null, null);
           return;
         }
+        // if needed, look into users collection to get user info
+        // else send back only the sorted tweets
         if (userId) {
           db.collection("users").find({ _id: ObjectId(userId) }).toArray((err, arr_user) => {
             if (err) {
               callback(err, null, null);
               return;
             }
+            // if there is a match, send back the info
+            // else send back only the sorted tweets
             if (arr_user[0]) {
               callback(null, {
                 handle: arr_user[0].handle,
@@ -127,8 +134,10 @@ module.exports = function makeDataHelpers(db) {
           if (err) {
             callback(err, null);
           }
+          // if the user already exists in the tweet's liked array,
+          // then it was a undo-like action, take the user id out of the array.
+          // else, add the user id into the array
           let index = result.likes.indexOf(uId);
-          let updated = [];
           if (index === -1) {
             result.likes.push(uId);
             callback(null, true);
