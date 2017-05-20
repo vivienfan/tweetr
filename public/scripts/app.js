@@ -232,6 +232,7 @@ $(document).ready(function() {
   function displayLogin(){
     $("#img-dropdown").removeClass("hide");
     $("#compose").removeClass("hide");
+    $("#logged-menu").slideUp();
     $("#show-register").addClass("hide");
     $("#show-login").addClass("hide");
     $("#tweets-container").find(".like-tweet").removeClass("hide");

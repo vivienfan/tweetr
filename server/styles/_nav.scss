@@ -8,68 +8,78 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
 
-  #logo_header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+#logo_header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 
-    .logo {
-      height: 80px;
-    }
-
-    .header {
-      margin-left: $mediumSpace;
-      font-size: 200%;
-    }
+  .logo {
+    height: 80px;
   }
 
-  #menu {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 60px;
-
-    span{
-      margin: $smallSpace;
-      text-decoration: underline;
-    }
-
-    #image_dropdown{
-      display: flex;
-      flex-direction: column;
-
-      #m_avatar{
-        margin: $mediumSpace;
-        border-radius: $radius;
-      }
-
-      #logged-menu{
-        position: absolute;
-        top: 70px;
-        border-radius: $radius;
-        background-color: $tweeterBlue;
-        padding: $mediumSpace;
-        margin-left: $mediumSpace;
-
-        ul{
-          list-style: none;
-          padding-left: 0;
-        }
-
-        li {
-          text-decoration: underline;
-        }
-      }
-    }
-
-    #compose {
-      width: 130px;
-      border: $borderWidth solid black;
-      border-radius: $radius;
-      background-color: $tweeterLightBlue;
-      color: $tweeterBlue;
-    }
+  .header {
+    margin-left: $mediumSpace;
+    font-size: 200%;
   }
 }
 
+#menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 60px;
+
+  span{
+    margin: $smallSpace;
+    text-decoration: underline;
+  }
+}
+
+#image_dropdown{
+  display: flex;
+  flex-direction: column;
+}
+
+#m_avatar{
+  margin: $mediumSpace;
+  border-radius: $radius;
+}
+
+#logged-menu{
+  position: absolute;
+  top: 70px;
+  border-radius: $radius;
+  background-color: $tweeterBlue;
+  padding: $mediumSpace;
+
+  ul{
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: $mediumSpace;
+    text-decoration: underline;
+  }
+}
+
+#compose {
+  margin-left: $smallSpace;
+  // width: 130px;
+  padding: $mediumSpace;
+  height: 80%;
+  border: $borderWidth solid black;
+  border-radius: $radius;
+  background-color: $tweeterLightBlue;
+  color: $tweeterBlue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 20px;
+    margin-right: $smallSpace;
+  }
+}

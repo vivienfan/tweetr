@@ -22,6 +22,11 @@
       display: flex;
       justify-content: space-between;
 
+      input{
+        margin-top: $smallSpace;
+        height: 35px;
+      }
+
       .counter{
         margin: $mediumSpace;
       }
