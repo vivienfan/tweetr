@@ -13,7 +13,6 @@ This repository is the starter code for the project: Students will fork and clon
 - Node 5.10.x or above
 - bcypt
 - body-parser
-- chance
 - cookie-session
 - dotenv
 - md5
