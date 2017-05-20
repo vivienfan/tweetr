@@ -79,10 +79,6 @@ module.exports = function makeDataHelpers(db) {
       });
     },
 
-    getUserInfo: function(userId, callback) {
-
-    },
-
     // Saves a tweet to db
     saveTweet: function(newTweet, callback) {
       db.collection("tweets").insertOne(newTweet);

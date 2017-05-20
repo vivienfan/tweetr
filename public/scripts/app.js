@@ -8,6 +8,8 @@ $(document).ready(function() {
   let USERNAME;
   let AVATAR;
 
+/*------------------------------ Functions ------------------------------*/
+
   // This helper function checks the created time of the tweet,
   // and to return the appropriate message in the form "{#} {unit} ago"
   // input: date in milliseconds since 1970
@@ -76,9 +78,11 @@ $(document).ready(function() {
     let $count = $("<span>", { class: "like-count" }).text(tweet.likes.length);
     let $like = $("<img>", { class: "like-tweet clickable hide" });
     let $span = $("<span>", { class: "like-text" }).text("likes");
+    // allows like button once user is logged in
     if (HANDLE && tweet.user.handle !== HANDLE) {
       $like.removeClass("hide");
       $span.addClass("hide");
+      // diaplay "liked" and "not-liked" image for the button
       if (tweet.likes.includes(HANDLE)) {
         $like.attr("src", "/images/heart.png");
       } else {
@@ -123,6 +127,8 @@ $(document).ready(function() {
       dataType: 'json',
       success: function (res) {
         if(res.userInfo) {
+          // on refresh, if the user cookie exists,
+          // server sends back the info, client displays accordingly
           USERNAME = res.userInfo.name;
           HANDLE = res.userInfo.handle;
           AVATAR = res.userInfo.avatar;
@@ -153,7 +159,6 @@ $(document).ready(function() {
 
   function checkRegParams(fname, lname, username, email, password) {
     let pass = true;
-
     if (!fname) {
       $("#r_fn_miss").removeClass("hide");
       pass = false;
@@ -174,7 +179,6 @@ $(document).ready(function() {
       $("#r_p_miss").removeClass("hide");
       pass = false;
     }
-
     return pass;
   }
 
@@ -258,6 +262,8 @@ $(document).ready(function() {
   }
 
 
+/*------------------------------ Event Handlers ------------------------------*/
+
   // Send a ajax post request after passing validation check
   // target: #submit (button)
   // event: on click
@@ -287,7 +293,7 @@ $(document).ready(function() {
         name: USERNAME,
         handle: HANDLE,
         avatar: AVATAR,
-        content: $(this).siblings("textarea").val()
+        content: $(this).parent().siblings("textarea").val()
       },
       dataType: "json",
       complete: function() {
@@ -326,10 +332,12 @@ $(document).ready(function() {
     $.ajax({
       url: `/tweets/${tid}/${HANDLE}`,
       method: "POST",
-      data: { id: tid, option: $(this).data("liked") },
+      data: { id: tid, option: HANDLE },
       dataType: "json",
       success: function(like) {
         let prev = +$(event.target).siblings(".like-count").text();
+        // if the action is a like, display a heart, increament counter
+        // else, display a heart outline, decreament counter
         if (like) {
           $(event.target).attr("src", "/images/heart.png");
           $(event.target).siblings(".like-count").text(prev + 1);
@@ -385,6 +393,8 @@ $(document).ready(function() {
       },
       dataType: "json",
       error: function(request, status, err) {
+        // if the email or username already registered,
+        // display error message accordingly
         if (!$.parseJSON(request.responseText).emailOk){
           $("#r_email_err").removeClass("hide");
         }
@@ -393,6 +403,9 @@ $(document).ready(function() {
         }
       },
       success: function(res) {
+        // clear all the input field, close the modal dialog
+        // store and update user info
+        // display logged in nav, and reload tweets
         clearRegVal();
         $(event.target).closest(".modal").addClass("hide");
         HANDLE = res.handle;
@@ -411,6 +424,9 @@ $(document).ready(function() {
 
     let key = $(this).siblings("#l_eu").val();
     let password = $(this).siblings("#l_password").val();
+
+    // check if the inputs are missing,
+    // if so, return straight the way, do not send the request
     if (!checkLogParams(key, password)) {
       return;
     }
@@ -421,9 +437,14 @@ $(document).ready(function() {
       data: {key: key, password: password},
       dataType: "json",
       error: function() {
+        // if the email/username and password does not match,
+        // display error message accordingly
         $("#l_err").removeClass("hide");
       },
       success: function(res) {
+        // on success, clear all the user input, close the modal window
+        // update user info into global varaibale
+        // change nav bar, and reload the tweets, shows like button
         clearLogVal();
         $(event.target).closest(".modal").addClass("hide");
         HANDLE = res.handle;
@@ -441,6 +462,8 @@ $(document).ready(function() {
       url: "/logout",
       method: "POST",
       success: function() {
+        // on success, clear all user info
+        // change nav bar
         HANDLE = null;
         AVATAR = null;
         USERNAME = null;
@@ -461,8 +484,10 @@ $(document).ready(function() {
   //   });
   // });
 
-  // page initialization
-  loadTweets();
+
+/*------------------------------ Page Initialization ------------------------------*/
+  loadTweets();   // loadTweets updates user info too
+
   if (!HANDLE) {
     displayLogout();
   } else {
