@@ -5,6 +5,10 @@ Tweetr is a simple, single-page Twitter clone.
 This repository is the starter code for the project: Students will fork and clone this repository, then build upon it to practice their HTML, CSS, SCSS, JS, jQuery and AJAX front-end skills, and their Node, Express and MongoDB back-end skills.
 
 ## Final Product
+!["main"](https://github.com/vivienfan/tweetr/blob/master/document/main.png?raw=true)
+
+When a user is logged-in, the user can compose a new tweet, like or unlike a tweet posted by other tweeter. When a user clicks on their avatar, a drop-down menu shows more options.
+
 !["main(logged-out)"](https://github.com/vivienfan/tweetr/blob/master/document/main(logged-out).png?raw=true)
 
 When a user is logged out, the user can only read tweets, register or login.
