@@ -18,9 +18,7 @@ On registration, the server does error checkings for duplicated email and userna
 On login, user can login use either the email or the username they registered with. The server then checks if the pair matches with the database.
 
 
-!["medium-screen"](https://github.com/vivienfan/tweetr/blob/master/document/medium-screen.png?raw=true)
-
-!["small-screen"](https://github.com/vivienfan/tweetr/blob/master/document/small-screen.png?raw=true)
+!["medium-screen"](https://github.com/vivienfan/tweetr/blob/master/document/medium-screen.png?raw=true) !["small-screen"](https://github.com/vivienfan/tweetr/blob/master/document/small-screen.png?raw=true)
 Responsive deisgn, allows different looks on different sizes of devices.
 
 ## Dependencies
