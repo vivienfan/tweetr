@@ -1,0 +1,189 @@
+.clickable {
+  cursor: pointer; }
+
+.highlight {
+  border-color: 1px solid #719ECE;
+  box-shadow: 0 0 10px #719ECE; }
+
+.hide {
+  display: none; }
+
+.error {
+  color: red; }
+
+.flashMsg {
+  font-size: 12px; }
+
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */ }
+  .modal .modal-content {
+    background-color: #eee;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; }
+    .modal .modal-content .close {
+      color: #888;
+      float: right;
+      font-size: 28px;
+      font-weight: bold; }
+    .modal .modal-content .close:hover,
+    .modal .modal-content .close:focus {
+      color: black;
+      text-decoration: none; }
+    .modal .modal-content h1 {
+      border-bottom: 1px solid black; }
+
+body {
+  margin: 0;
+  color: #244751;
+  background-color: #eee;
+  font-family: 'Roboto Condensed:700i', sans-serif; }
+
+#nav-bar {
+  position: fixed;
+  height: 80px;
+  width: 100%;
+  background-color: #00a087;
+  color: #e8fdff;
+  padding: 0 2em 0 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  #nav-bar #logo_header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; }
+    #nav-bar #logo_header .logo {
+      height: 80px; }
+    #nav-bar #logo_header .header {
+      margin-left: 10px;
+      font-size: 200%; }
+  #nav-bar #menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 60px; }
+    #nav-bar #menu span {
+      margin: 5px;
+      text-decoration: underline; }
+    #nav-bar #menu #image_dropdown {
+      display: flex;
+      flex-direction: column; }
+      #nav-bar #menu #image_dropdown #m_avatar {
+        margin: 10px;
+        border-radius: 10px; }
+      #nav-bar #menu #image_dropdown #logged-menu {
+        position: absolute;
+        top: 70px;
+        border-radius: 10px;
+        background-color: #00a087;
+        padding: 10px;
+        margin-left: 10px; }
+        #nav-bar #menu #image_dropdown #logged-menu ul {
+          list-style: none;
+          padding-left: 0; }
+        #nav-bar #menu #image_dropdown #logged-menu li {
+          text-decoration: underline; }
+    #nav-bar #menu #compose {
+      width: 130px;
+      border: 1px solid black;
+      border-radius: 10px;
+      background-color: #e8fdff;
+      color: #00a087; }
+
+main {
+  width: 450px;
+  margin: 0 auto;
+  background-color: white;
+  padding-top: 100px;
+  padding-bottom: 20px; }
+
+.new-tweet {
+  margin: 2em;
+  border-radius: 10px;
+  background-color: #eee;
+  padding: 10px;
+  border: 1px solid #eee; }
+  .new-tweet h2 {
+    border-bottom: 2px solid;
+    margin-top: 5px;
+    margin-bottom: 20px; }
+  .new-tweet form textarea {
+    padding: 5px;
+    width: 100%;
+    border-radius: 2px; }
+  .new-tweet form div {
+    display: flex;
+    justify-content: space-between; }
+    .new-tweet form div .counter {
+      margin: 10px; }
+
+#tweets-container {
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: 1em; }
+  #tweets-container article {
+    margin-bottom: 1em;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column; }
+    #tweets-container article header {
+      padding: 10px;
+      height: 4em;
+      background-color: #eee;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      #tweets-container article header .name {
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px; }
+      #tweets-container article header #tweets-container .handle {
+        color: #888; }
+    #tweets-container article .tweet {
+      padding: 10px;
+      word-wrap: break-word;
+      overflow-wrap: break-word; }
+    #tweets-container article footer {
+      padding: 10px;
+      width: 100%;
+      height: 40px;
+      font-size: 12px;
+      border-top: 1px solid #ddd;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      #tweets-container article footer .footer-div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end; }
+        #tweets-container article footer .footer-div .like-tweet {
+          width: 20px;
+          height: 20px;
+          margin-left: 5px;
+          outline: none; }
+        #tweets-container article footer .footer-div .like-text {
+          margin-left: 5px; }

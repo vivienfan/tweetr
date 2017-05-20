@@ -74,7 +74,7 @@ $(document).ready(function() {
     let $time = $("<span>").text(getDate(tweet.created_at));
     let $div = $("<div>", { class: "footer-div" });
     let $count = $("<span>", { class: "like-count" }).text(tweet.likes.length);
-    let $like = $("<img>", { class: "like-tweet hide" });
+    let $like = $("<img>", { class: "like-tweet clickable hide" });
     let $span = $("<span>", { class: "like-text" }).text("likes");
     if (HANDLE && tweet.user.handle !== HANDLE) {
       $like.removeClass("hide");

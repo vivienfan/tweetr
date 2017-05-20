@@ -4,16 +4,24 @@ const PORT            = 8080;
 const express         = require("express");
 const bodyParser      = require("body-parser");
 const cookieSession   = require('cookie-session');
-const bcrypt          = require('bcrypt');
+const morgan          = require('morgan')
+const sassMiddleware  = require('node-sass-middleware')
 
 const app             = express();
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
 app.use(cookieSession({
   name: "session",
   keys: ["This-is-my-secrete-key"],
   maxAge: 20 * 365 * 24 * 60 * 60 * 1000 // 20 years
 }));
+app.use(sassMiddleware({
+    src: "./server",
+    dest: "./public",
+    debug: true,
+    outputStyle: 'pretty'
+}));
+app.use(express.static("public"));
+app.use(morgan('dev'));
 
 const MongoClient = require("mongodb").MongoClient;
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";

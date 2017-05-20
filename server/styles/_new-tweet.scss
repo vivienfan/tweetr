@@ -1,0 +1,33 @@
+.new-tweet {
+  margin: 2em;
+  border-radius: $radius;
+  background-color: $lightGrey;
+  padding: $mediumSpace;
+  border: $borderWidth solid $lightGrey;
+
+  h2 {
+    border-bottom: $widerBorderWidth solid;
+    margin-top: $smallSpace;
+    margin-bottom: $largeSpace;
+  }
+
+  form{
+    textarea{
+      padding: $smallSpace;
+      width: 100%;
+      border-radius: $widerBorderWidth;
+    }
+
+    div{
+      display: flex;
+      justify-content: space-between;
+
+      .counter{
+        margin: $mediumSpace;
+      }
+    }
+  }
+}
+
+
+

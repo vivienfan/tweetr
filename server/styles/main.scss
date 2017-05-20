@@ -1,0 +1,72 @@
+$transBlack: rgba(0,0,0,0.4);
+$darkGrey: #888;
+$grey: #ddd;
+$lightGrey: #eee;
+$tweeterBlue: #00a087;
+$tweeterLightBlue: #e8fdff;
+$highlightBlue: #719ECE;
+
+$radius: 10px;
+
+$fontSmall: 12px;
+$fontLarge: 28px;
+
+$borderWidth: 1px;
+$widerBorderWidth: 2px;
+
+$smallSpace: 5px;
+$mediumSpace: 10px;
+$largeSpace: 20px;
+$extraLargeSpace: 100px;
+
+.clickable {
+  cursor: pointer;
+}
+
+.highlight {
+  border-color: $borderWidth solid $highlightBlue;
+  box-shadow: 0 0 $mediumSpace $highlightBlue;
+}
+
+.hide {
+  display: none;
+}
+
+.error{
+  color: red;
+}
+
+.flashMsg{
+  font-size: $fontSmall;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+@import 'modal';
+
+body {
+  margin: 0;
+  color: #244751;
+  background-color: $lightGrey;
+  font-family: 'Roboto Condensed:700i', sans-serif;
+}
+
+@import 'nav';
+
+main {
+  width: 450px;
+  margin: 0 auto;
+  background-color: white;
+  padding-top: $extraLargeSpace;
+  padding-bottom: $largeSpace;
+}
+
+@import 'new-tweet';
+
+@import 'tweets-container';
+

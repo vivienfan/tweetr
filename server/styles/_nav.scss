@@ -1,0 +1,75 @@
+ #nav-bar {
+  position: fixed;
+  height: 80px;
+  width: 100%;
+  background-color: $tweeterBlue;
+  color: $tweeterLightBlue;
+  padding: 0 2em 0 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  #logo_header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    .logo {
+      height: 80px;
+    }
+
+    .header {
+      margin-left: $mediumSpace;
+      font-size: 200%;
+    }
+  }
+
+  #menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 60px;
+
+    span{
+      margin: $smallSpace;
+      text-decoration: underline;
+    }
+
+    #image_dropdown{
+      display: flex;
+      flex-direction: column;
+
+      #m_avatar{
+        margin: $mediumSpace;
+        border-radius: $radius;
+      }
+
+      #logged-menu{
+        position: absolute;
+        top: 70px;
+        border-radius: $radius;
+        background-color: $tweeterBlue;
+        padding: $mediumSpace;
+        margin-left: $mediumSpace;
+
+        ul{
+          list-style: none;
+          padding-left: 0;
+        }
+
+        li {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    #compose {
+      width: 130px;
+      border: $borderWidth solid black;
+      border-radius: $radius;
+      background-color: $tweeterLightBlue;
+      color: $tweeterBlue;
+    }
+  }
+}
+

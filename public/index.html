@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700i">
 
     <!-- App CSS -->
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<!--     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="../styles/nav.css" type="text/css"/>
     <link rel="stylesheet" href="../styles/new-tweet.css" type="text/css"/>
     <link rel="stylesheet" href="../styles/all-tweet.css" type="text/css"/>
-    <link rel="stylesheet" href="../styles/modal.css" type="text/css"/>
+    <link rel="stylesheet" href="../styles/modal.css" type="text/css"/> -->
+    <link rel="stylesheet" href="./styles/main.css" type="text/css">
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
@@ -35,30 +36,32 @@
         <span class="header">Tweeter</span>
       </div>
       <div id="menu">
-          <span id="show-register" class="button">Register</span>
-          <span id="show-login" class="button">Login</span>
+          <span id="show-register" class="clickable">Register</span>
+          <span id="show-login" class="clickable">Login</span>
           <div id="img-dropdown" class="hide">
-            <img id="m_avatar">
-            <div id="logged-menu">
+            <img id="m_avatar" class="clickable">
+            <div id="logged-menu" class="hide">
               <ul>
-                <li id="logout" class="button">Logout</li>
-                <li id="settings" class="button">Settings</li>
+                <li id="logout" class="clickable">Logout</li>
+                <li id="settings" class="clickable">Settings</li>
               </ul>
             </div>
           </div>
-          <button id="compose" class="hide">Compose</button>
+          <button id="compose" class="hide clickable">Compose</button>
       </div>
     </nav>
 
     <!-- Page-specific (main) content here -->
     <main class="container">
-      <section class="new-tweet" data-limit="140">
+      <section class="new-tweet hide" data-limit="140">
         <h2>Compose Tweet</h2>
         <form action="/tweets" method="POST">
           <textarea name="text" placeholder="What are you humming about?"></textarea>
-          <input id="submit" type="submit" value="Tweet">
-          <span class="flashMsg error"></span>
-          <span class="counter">140</span>
+          <div>
+            <input id="submit" type="submit" value="Tweet">
+            <span class="flashMsg error"></span>
+            <span class="counter">140</span>
+          </div>
         </form>
       </section>
       <section id="tweets-container"></section>
@@ -91,7 +94,7 @@
   <!-- Register modal box -->
   <div id="register-modal" class="modal hide">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close clickable">&times;</span>
       <h1>Register</h1>
       <label>First Name:</label>
       <br>
