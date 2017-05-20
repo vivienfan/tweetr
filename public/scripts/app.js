@@ -371,8 +371,8 @@ $(document).ready(function() {
 
     let fname = $(this).siblings("#r_fname").val();
     let lname = $(this).siblings("#r_lname").val();
-    let username = $(this).siblings("#r_username").val();
-    let email = $(this).siblings("#r_email").val();
+    let username = $(this).siblings("#r_username").val().toLowerCase();
+    let email = $(this).siblings("#r_email").val().toLowerCase();
     let password = $(this).siblings("#r_password").val();
 
     // check if the inputs are missing,
@@ -422,8 +422,9 @@ $(document).ready(function() {
     clearLogMsg();
     clearLogAsterisk();
 
-    let key = $(this).siblings("#l_eu").val();
+    let key = $(this).siblings("#l_eu").val().toLowerCase();
     let password = $(this).siblings("#l_password").val();
+    console.log(key);
 
     // check if the inputs are missing,
     // if so, return straight the way, do not send the request
