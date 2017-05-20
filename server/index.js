@@ -17,8 +17,6 @@ app.use(cookieSession({
 app.use(sassMiddleware({
     src: "./server",
     dest: "./public",
-    debug: true,
-    outputStyle: 'pretty'
 }));
 app.use(express.static("public"));
 app.use(morgan('dev'));
