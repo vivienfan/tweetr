@@ -30,6 +30,17 @@ On login, user can login use either the email or the username they registered wi
 
 Responsive deisgn, allows different looks on different sizes of devices.
 
+## How To Run Locally
+
+1. Define MONGODB_URL in .env file to indicate the url for the mongoDB database that you are using.
+    e.g. MONGODB = mongodb://localhost:27017/tweeter
+
+2. Run one of the following command in the terminal to start the server:
+  - npm start
+  - npm run local
+
+3. Open browser, and go to http://localhost:8080/
+
 ## Dependencies
 
 - Express
