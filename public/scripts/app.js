@@ -4,9 +4,9 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 $(document).ready(function() {
-  let HANDLE;
-  let USERNAME;
-  let AVATAR;
+  var HANDLE;
+  var USERNAME;
+  var AVATAR;
 
 /*------------------------------ Functions ------------------------------*/
 
@@ -15,40 +15,40 @@ $(document).ready(function() {
   // input: date in milliseconds since 1970
   // output: string, "{#} {unit} ago"
   function getDate(date) {
-    let createdAt = new Date(date);
-    let now = new Date();
+    var createdAt = new Date(date);
+    var now = new Date();
 
     // find the difference in year,
     // if more than 1, return unit in years
-    let yDiff  = now.getFullYear() - createdAt.getFullYear();
+    var yDiff  = now.getFullYear() - createdAt.getFullYear();
     if (yDiff > 0) {
       return `${yDiff} years ago`;
     }
 
     // find the difference in month,
     // if more than 1, return unit in months
-    let monDiff = now.getMonth() - createdAt.getMonth();
+    var monDiff = now.getMonth() - createdAt.getMonth();
     if (monDiff > 0) {
       return `${monDiff} months ago`;
     }
 
     // find the difference in day,
     // if more than 1, return unit in days
-    let dDiff = now.getDate() - createdAt.getDate();
+    var dDiff = now.getDate() - createdAt.getDate();
     if (dDiff > 0) {
       return `${dDiff} days ago`;
     }
 
     // find the difference in hours,
     // if more than 1, return unit in hours
-    let hDiff = now.getHours() - createdAt.getHours();
+    var hDiff = now.getHours() - createdAt.getHours();
     if (hDiff > 0) {
       return `${hDiff} hours ago`;
     }
 
     // find the difference in minutes,
     // if more than 1, return unit in minutes
-    let minDiff = now.getMinutes() - createdAt.getMinutes();
+    var minDiff = now.getMinutes() - createdAt.getMinutes();
     if (minDiff > 0) {
       return `${minDiff} minutes ago`;
     }
@@ -62,22 +62,22 @@ $(document).ready(function() {
   // output: object - nested html article tag
   function createTweetElement(tweet) {
      // header section
-    let $header = $("<header>");
-    let $avatar = $("<img>", { class: "avatar", src: tweet.user.avatars.small });
-    let $name = $("<h2>", { class: "name" }).text(tweet.user.name);
-    let $handle = $("<p>", { class: "handle" }).text(tweet.user.handle);
+    var $header = $("<header>");
+    var $avatar = $("<img>", { class: "avatar", src: tweet.user.avatars.small });
+    var $name = $("<h2>", { class: "name" }).text(tweet.user.name);
+    var $handle = $("<p>", { class: "handle" }).text(tweet.user.handle);
     $header.append($avatar, $name, $handle);
 
     // body section
-    let $tweet = $("<div>", { class: "tweet" }).text(tweet.content.text);
+    var $tweet = $("<div>", { class: "tweet" }).text(tweet.content.text);
 
     // footer section
-    let $footer = $("<footer>");
-    let $time = $("<span>").text(getDate(tweet.created_at));
-    let $div = $("<div>", { class: "footer-div" });
-    let $count = $("<span>", { class: "like-count" }).text(tweet.likes.length);
-    let $like = $("<img>", { class: "like-tweet clickable hide" });
-    let $span = $("<span>", { class: "like-text" }).text("likes");
+    var $footer = $("<footer>");
+    var $time = $("<span>").text(getDate(tweet.created_at));
+    var $div = $("<div>", { class: "footer-div" });
+    var $count = $("<span>", { class: "like-count" }).text(tweet.likes.length);
+    var $like = $("<img>", { class: "like-tweet clickable hide" });
+    var $span = $("<span>", { class: "like-text" }).text("likes");
     // allows like button once user is logged in
     if (HANDLE && tweet.user.handle !== HANDLE) {
       $like.removeClass("hide");
@@ -93,7 +93,7 @@ $(document).ready(function() {
     $footer.append($time, $div);
 
     // entire article
-    let $article = $("<article>");
+    var $article = $("<article>");
     $article.attr("data-tid", tweet._id);
     $article.attr("data-uid", HANDLE);
     $article.append($header, $tweet, $footer);
@@ -109,7 +109,7 @@ $(document).ready(function() {
   // input: tweets - sorted array (ascending according to created time)
   // output: none
   function renderTweets(tweets) {
-    tweets.forEach((tweet) => {
+    tweets.forEach(function(tweet) {
       $('#tweets-container').prepend(createTweetElement(tweet));
     });
   }
@@ -152,13 +152,13 @@ $(document).ready(function() {
   // input: none
   // output: none
   function refreshTextarea() {
-    let limit = $(".new-tweet").data("limit");
+    var limit = $(".new-tweet").data("limit");
     $(".new-tweet textarea").val("");
     $(".new-tweet .counter").text(limit);
   }
 
   function checkRegParams(fname, lname, username, email, password) {
-    let pass = true;
+    var pass = true;
     if (!fname) {
       $("#r_fn_miss").removeClass("hide");
       pass = false;
@@ -183,7 +183,7 @@ $(document).ready(function() {
   }
 
   function checkLogParams(key, password) {
-    let pass = true;
+    var pass = true;
     if (!key) {
       $("#l_eu_miss").removeClass("hide");
       pass = false;
@@ -273,8 +273,8 @@ $(document).ready(function() {
 
     // check if the tweet content is empty, or exceeded the limit
     // if error, display flash message and return
-    let counter = +$(this).siblings(".counter").text();
-    let limit = +$(this).closest(".new-tweet").data("limit");
+    var counter = +$(this).siblings(".counter").text();
+    var limit = +$(this).closest(".new-tweet").data("limit");
     if (counter < 0 ) {
       $(this).siblings(".flashMsg").text("Content too long.");
         return;
@@ -296,7 +296,7 @@ $(document).ready(function() {
         content: $(this).parent().siblings("textarea").val()
       },
       dataType: "json",
-      complete: function() {
+      compvare: function() {
         refreshTextarea();
         loadTweets(1);
       }
@@ -328,14 +328,14 @@ $(document).ready(function() {
   $("#tweets-container").on("click", ".like-tweet", function(event) {
     // send a ajax request, replacing the request from original html form
     // highlight or undo highlight on sucess
-    let tid = $(this).closest("article").data("tid");
+    var tid = $(this).closest("article").data("tid");
     $.ajax({
       url: `/tweets/${tid}/${HANDLE}`,
       method: "POST",
       data: { id: tid, option: HANDLE },
       dataType: "json",
       success: function(like) {
-        let prev = +$(event.target).siblings(".like-count").text();
+        var prev = +$(event.target).siblings(".like-count").text();
         // if the action is a like, display a heart, increament counter
         // else, display a heart outline, decreament counter
         if (like) {
@@ -369,11 +369,11 @@ $(document).ready(function() {
     clearRegMsg();
     clearRegAsterisk();
 
-    let fname = $(this).siblings("#r_fname").val();
-    let lname = $(this).siblings("#r_lname").val();
-    let username = $(this).siblings("#r_username").val().toLowerCase();
-    let email = $(this).siblings("#r_email").val().toLowerCase();
-    let password = $(this).siblings("#r_password").val();
+    var fname = $(this).siblings("#r_fname").val();
+    var lname = $(this).siblings("#r_lname").val();
+    var username = $(this).siblings("#r_username").val().toLowerCase();
+    var email = $(this).siblings("#r_email").val().toLowerCase();
+    var password = $(this).siblings("#r_password").val();
 
     // check if the inputs are missing,
     // if so, return straight the way, do not send the request
@@ -422,8 +422,8 @@ $(document).ready(function() {
     clearLogMsg();
     clearLogAsterisk();
 
-    let key = $(this).siblings("#l_eu").val().toLowerCase();
-    let password = $(this).siblings("#l_password").val();
+    var key = $(this).siblings("#l_eu").val().toLowerCase();
+    var password = $(this).siblings("#l_password").val();
     console.log(key);
 
     // check if the inputs are missing,
@@ -479,7 +479,7 @@ $(document).ready(function() {
   //     method: "PUT",
   //     data: ,
   //     dataType: ,
-  //     complete: function() {
+  //     compvare: function() {
 
   //     }
   //   });
